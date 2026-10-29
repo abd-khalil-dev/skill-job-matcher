@@ -27,3 +27,13 @@ variable "db_instance_class" {
   type    = string
   default = "db.t4g.micro"
 }
+
+variable "kubernetes_version" {
+  type    = string
+  default = "1.36"
+}
+
+variable "node_instance_type" {
+  type    = string
+  default = "t3.small"
+}
