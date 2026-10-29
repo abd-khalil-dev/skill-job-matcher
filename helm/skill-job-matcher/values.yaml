@@ -17,3 +17,9 @@ db:
   user: jobs_user
   secretName: db-credentials
   initConfigMap: db-init
+
+networkPolicy:
+  enabled: true
+  rdsCidrs:
+    - 10.0.10.0/24
+    - 10.0.11.0/24
