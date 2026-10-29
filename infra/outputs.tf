@@ -13,3 +13,11 @@ output "private_subnet_ids" {
 output "ecr_repository_urls" {
   value = { for k, r in aws_ecr_repository.app : k => r.repository_url }
 }
+
+output "rds_endpoint" {
+  value = aws_db_instance.main.address
+}
+
+output "rds_secret_arn" {
+  value = aws_db_instance.main.master_user_secret[0].secret_arn
+}
