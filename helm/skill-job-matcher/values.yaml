@@ -1,0 +1,19 @@
+backend:
+  image:
+    repository: ""
+    tag: ""
+  replicas: 2
+  port: 5000
+
+frontend:
+  image:
+    repository: ""
+    tag: ""
+  replicas: 2
+
+db:
+  host: ""
+  name: jobsdb
+  user: jobs_user
+  secretName: db-credentials
+  initConfigMap: db-init
