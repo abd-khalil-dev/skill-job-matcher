@@ -7,3 +7,5 @@ __pycache__/
 *.tfstate*
 *.tfvars
 backend.hcl
+.coverage
+coverage.xml

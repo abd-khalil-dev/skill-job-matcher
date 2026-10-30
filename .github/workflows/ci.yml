@@ -17,10 +17,10 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install pytest
-        run: pip install pytest
+        run: pip install -r backend/requirements.txt pytest pytest-cov
       - name: Run unit tests
         working-directory: backend
-        run: python -m pytest -v
+        run: python -m pytest -v --cov=matcher --cov=app --cov-report=xml
 
   build:
     runs-on: ubuntu-latest
