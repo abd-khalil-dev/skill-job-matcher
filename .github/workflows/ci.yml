@@ -13,14 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Install pytest
+      - name: Install dependencies
         run: pip install -r backend/requirements.txt pytest pytest-cov
-      - name: Run unit tests
-        working-directory: backend
-        run: python -m pytest -v --cov=matcher --cov=app --cov-report=xml
+      - name: Run unit tests with coverage
+        env:
+          PYTHONPATH: backend
+        run: python -m pytest backend/tests -v --cov=backend --cov-report=xml
+      - name: SonarQube Cloud scan
+        uses: SonarSource/sonarqube-scan-action@v8
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
