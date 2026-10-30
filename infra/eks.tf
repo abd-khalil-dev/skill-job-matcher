@@ -22,6 +22,22 @@ module "eks" {
     }
   }
 
+  access_entries = {
+    github_actions = {
+      principal_arn = data.aws_iam_role.github_actions.arn
+
+      policy_associations = {
+        deploy = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSEditPolicy"
+          access_scope = {
+            type       = "namespace"
+            namespaces = ["default"]
+          }
+        }
+      }
+    }
+  }
+
   eks_managed_node_groups = {
     default = {
       ami_type       = "AL2023_x86_64_STANDARD"
@@ -40,4 +56,8 @@ resource "aws_vpc_security_group_ingress_rule" "rds_from_nodes" {
   from_port                    = 5432
   to_port                      = 5432
   description                  = "Postgres from EKS nodes only"
+}
+
+data "aws_iam_role" "github_actions" {
+  name = "skill-job-matcher-github-actions"
 }
