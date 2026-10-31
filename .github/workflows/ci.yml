@@ -63,7 +63,7 @@ jobs:
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::EKS cluster nahi hai, deploy skip kiya gaya"
+            echo "::notice::EKS cluster does not exist, deploy skipped"
           fi
       - name: Login to ECR
         if: steps.cluster.outputs.exists == 'true'

@@ -19,4 +19,4 @@ aws secretsmanager get-secret-value --secret-id "$SECRET_ARN" --query SecretStri
   | kubectl apply -f -
 kubectl create configmap db-init --from-file=init.sql="$ROOT/db/init.sql" --dry-run=client -o yaml | kubectl apply -f -
 
-echo "up done. Ab pipeline chalao (git push ya Actions mein Run workflow)."
+echo "up done. Now run the pipeline (git push or Run workflow in Actions)."

@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-helm uninstall skill 2>/dev/null || echo "helm release skill nahi mila, aage barh raha hoon"
+helm uninstall skill 2>/dev/null || echo "helm release skill not found, continuing"
 for i in $(seq 1 20); do
   [ -z "$(aws elb describe-load-balancers --query 'LoadBalancerDescriptions[].LoadBalancerName' --output text)" ] && break
   sleep 15
@@ -12,7 +12,7 @@ done
 cd "$ROOT/infra"
 terraform destroy -input=false -auto-approve
 
-echo "--- bacha hua (khali hona chahiye) ---"
+echo "--- leftovers (should all be empty) ---"
 aws eks list-clusters --query clusters --output text
 aws rds describe-db-instances --query 'DBInstances[].DBInstanceIdentifier' --output text
 aws ec2 describe-nat-gateways --filter Name=state,Values=available,pending --query 'NatGateways[].NatGatewayId' --output text

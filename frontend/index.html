@@ -16,7 +16,7 @@ th { background: #f0f0f0; }
 </head>
 <body>
 <h1>Skill-to-Job Matcher</h1>
-<p>Apni skills comma se alag likho (jaise: python, docker, sql)</p>
+<p>Enter your skills separated by commas (for example: python, docker, sql)</p>
 <input id="skills" placeholder="python, docker, sql">
 <button id="go">Match</button>
 <div id="msg"></div>
@@ -33,7 +33,7 @@ async function match() {
   msg.textContent = "";
   const skills = document.getElementById("skills").value
     .split(",").map(s => s.trim()).filter(Boolean);
-  if (skills.length === 0) { msg.textContent = "Kam az kam ek skill likho"; return; }
+  if (skills.length === 0) { msg.textContent = "Please enter at least one skill"; return; }
   try {
     const res = await fetch("/api/match", {
       method: "POST",
