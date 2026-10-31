@@ -30,7 +30,10 @@ data "aws_iam_policy_document" "github_trust" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${local.github_repo}:ref:refs/heads/main"]
+      values = [
+        "repo:${local.github_repo}:ref:refs/heads/main",
+        "repo:abd-khalil-dev@318783742/skill-job-matcher@1437668594:ref:refs/heads/main",
+      ]
     }
   }
 }
